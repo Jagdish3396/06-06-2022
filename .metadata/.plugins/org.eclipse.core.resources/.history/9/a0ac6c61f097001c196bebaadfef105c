@@ -1,0 +1,78 @@
+package com.BikkadIt.Service;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.BikkadIt.Database.HibernateUtil;
+import com.BikkadIt.Model.Student;
+
+public class ServiceImpl implements Service {
+	Scanner sc=new Scanner(System.in);
+	Student s=new Student();
+
+	public static void main(String[] args) {
+	 SessionFactory sessionFactory = com.BikkadIt.Database.HibernateUtil.getSessionFactory();
+	 Session session = sessionFactory.openSession();
+
+	}
+
+	@Override
+	public void save() {
+		System.out.println("how many students Data you Want to save");
+		int count=sc.nextInt();
+		 SessionFactory sessionFactory = com.BikkadIt.Database.HibernateUtil.getSessionFactory();
+		 Session session1= sessionFactory.openSession();
+		
+		for(int i=1;i<=count;i++)
+		{
+			System.out.println("enter id");
+			int a=sc.nextInt();
+			s.setId(a);
+			System.out.println("enter name");
+			String a1=sc.next();
+			s.setName(a1);
+			System.out.println("enter email id");
+			String a2=sc.next();
+			s.setEmail(a2);
+			session1.beginTransaction();
+			session1.save(s);
+			session1.getTransaction().commit();
+			
+		}
+		
+		
+		
+	}
+
+	@Override
+	public void show() {
+		 SessionFactory sessionFactory = com.BikkadIt.Database.HibernateUtil.getSessionFactory();
+		 Session session1= sessionFactory.openSession();
+		 System.out.println("enter id");
+		int a3=sc.nextInt();
+		s.setId(a3);
+		Student student = session1.get(Student.class, 10);
+		System.out.println(student);
+		
+		
+		
+		
+	
+		
+	}
+
+	@Override
+	public void update() {
+	
+		
+	}
+
+	@Override
+	public void delete() {
+		
+		
+	}
+
+}
